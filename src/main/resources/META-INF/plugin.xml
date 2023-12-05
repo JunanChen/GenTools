@@ -8,12 +8,18 @@
     <name>GenTools</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">junan</vendor>
+    <vendor email="1286890175@qq.com" url="1286890175@qq.com">Junan</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-    <description>code generate tolls</description>
+    <description>
+        Welcome everyone to use GenTools.
+        I hope he can help you with your work.
+        Currently, it supports converting fields into entity classes through JSON.
+        you can use alt+c to trigger it
+        Perhaps there will be some new ideas in the future
+    </description>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
