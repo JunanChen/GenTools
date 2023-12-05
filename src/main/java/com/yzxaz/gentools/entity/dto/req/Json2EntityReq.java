@@ -24,62 +24,55 @@ public class Json2EntityReq {
         return dataJson;
     }
 
-    public Json2EntityReq dataJson(String dataJson) {
+    public void setDataJson(String dataJson) {
         this.dataJson = dataJson;
-        return this;
     }
 
     public Boolean getAccessors() {
         return accessors;
     }
 
-    public Json2EntityReq accessors(Boolean accessors) {
+    public void setAccessors(Boolean accessors) {
         this.accessors = accessors;
-        return this;
     }
 
     public String getAuthor() {
         return author;
     }
 
-    public Json2EntityReq author(String author) {
+    public void setAuthor(String author) {
         this.author = author;
-        return this;
     }
 
     public String getClassName() {
         return className;
     }
 
-    public Json2EntityReq className(String className) {
+    public void setClassName(String className) {
         this.className = className;
-        return this;
     }
 
     public Boolean getSerialize2Origin() {
         return serialize2Origin;
     }
 
-    public Json2EntityReq serialize2Origin(Boolean serialize2Origin) {
+    public void setSerialize2Origin(Boolean serialize2Origin) {
         this.serialize2Origin = serialize2Origin;
-        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public Json2EntityReq email(String email) {
+    public void setEmail(String email) {
         this.email = email;
-        return this;
     }
 
     public Boolean getSwagger() {
         return swagger;
     }
 
-    public Json2EntityReq swagger(Boolean swagger) {
+    public void setSwagger(Boolean swagger) {
         this.swagger = swagger;
-        return this;
     }
 }

@@ -15,6 +15,8 @@ repositories {
 
 dependencies {
     implementation("cn.hutool:hutool-http:5.8.16")
+    implementation("org.freemarker:freemarker:2.3.31")
+    implementation("com.alibaba:fastjson:1.2.78")
 }
 
 // Configure Gradle IntelliJ Plugin

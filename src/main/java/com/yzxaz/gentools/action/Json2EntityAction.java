@@ -1,6 +1,6 @@
 package com.yzxaz.gentools.action;
 
-import cn.hutool.http.HttpUtil;
+import cn.hutool.core.bean.BeanUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -15,18 +15,23 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.yzxaz.gentools.entity.dto.req.Json2EntityReq;
-import com.yzxaz.gentools.entity.dto.resp.Json2EntityResp;
+import com.yzxaz.gentools.entity.query.EntityQuery;
+import com.yzxaz.gentools.service.CodeService;
+import com.yzxaz.gentools.service.impl.CodeServiceImpl;
 
 
 /**
  * json 转实体的 action
  */
+@SuppressWarnings("all")
 public class Json2EntityAction extends AnAction {
 
     /**
      * jackson
      */
     private static ObjectMapper objectMapper = new ObjectMapper();
+
+    private static CodeService codeService = new CodeServiceImpl();
 
     @Override
     public void actionPerformed(AnActionEvent e) {
@@ -64,21 +69,24 @@ public class Json2EntityAction extends AnAction {
 
 
         // 请求服务器
-        String post = null;
-        Json2EntityResp json2EntityResp = null;
+        String code;
         try {
             Json2EntityReq json2EntityReq = new Json2EntityReq();
-            json2EntityReq.dataJson(json);
-            post = HttpUtil.post("http://175.178.169.18:9527/code-generation/generate/entity/json2EntityField", objectMapper.writeValueAsString(json2EntityReq));
-            json2EntityResp = objectMapper.readValue(post, Json2EntityResp.class);
-        } catch (JsonProcessingException ex) {
-            Messages.showMessageDialog("接口异常", "Json 2 Entity", Messages.getErrorIcon());
+            json2EntityReq.setDataJson(json);
+
+            code = codeService.convertJson2EntityField(BeanUtil.copyProperties(json2EntityReq, EntityQuery.class));
+//            post = HttpUtil.post("http://175.178.169.18:9527/code-generation/generate/entity/json2EntityField", objectMapper.writeValueAsString(json2EntityReq));
+//            json2EntityResp = objectMapper.readValue(code, Json2EntityResp.class);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Messages.showMessageDialog("code 生成失败：" + ex.getMessage(), "Json 2 Entity", Messages.getErrorIcon());
             return;
         }
 
         // 插入代码
-        Json2EntityResp finalJson2EntityResp = json2EntityResp;
-        WriteCommandAction.runWriteCommandAction(project, () -> editor.getDocument().insertString(editor.getCaretModel().getOffset(), finalJson2EntityResp.getData()));
+//        Json2EntityResp finalJson2EntityResp = json2EntityResp;
+        WriteCommandAction.runWriteCommandAction(project, () -> editor.getDocument().insertString(editor.getCaretModel().getOffset(), code));
     }
 
 }
