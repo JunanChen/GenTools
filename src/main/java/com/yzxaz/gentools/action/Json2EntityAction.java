@@ -75,9 +75,6 @@ public class Json2EntityAction extends AnAction {
             json2EntityReq.setDataJson(json);
 
             code = codeService.convertJson2EntityField(BeanUtil.copyProperties(json2EntityReq, EntityQuery.class));
-//            post = HttpUtil.post("http://175.178.169.18:9527/code-generation/generate/entity/json2EntityField", objectMapper.writeValueAsString(json2EntityReq));
-//            json2EntityResp = objectMapper.readValue(code, Json2EntityResp.class);
-
         } catch (Exception ex) {
             ex.printStackTrace();
             Messages.showMessageDialog("code 生成失败：" + ex.getMessage(), "Json 2 Entity", Messages.getErrorIcon());
@@ -85,7 +82,6 @@ public class Json2EntityAction extends AnAction {
         }
 
         // 插入代码
-//        Json2EntityResp finalJson2EntityResp = json2EntityResp;
         WriteCommandAction.runWriteCommandAction(project, () -> editor.getDocument().insertString(editor.getCaretModel().getOffset(), code));
     }
 
